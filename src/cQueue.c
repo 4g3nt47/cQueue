@@ -42,6 +42,19 @@ unsigned short queue_full(queue *q){
   return (q->count >= q->size);
 }
 
+void *queue_remove(queue *q, size_t pos){
+
+  if (pos >= q->count)
+    return NULL;
+  void *e = q->items[pos];
+  for (int i = pos; i < q->count && i != (q->count - 1); i++)
+    q->items[i] = q->items[i + 1];
+  q->count--;
+  if (q->pos > q->count)
+    q->pos = q->count;
+  return e;
+}
+
 unsigned short queue_empty(queue *q){
   return (q->count == 0);
 }

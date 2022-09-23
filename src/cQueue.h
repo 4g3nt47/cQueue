@@ -26,6 +26,9 @@ ssize_t queue_put(queue *q, void *e);
 // Get the next item in a queue. Returns NULL on error.
 void *queue_get(queue *q);
 
+// Remove an item at the given offset.
+void *queue_remove(queue *q, size_t pos);
+
 // Returns 1 if there is no space in the queue for a new item.
 unsigned short queue_full(queue *q);
 

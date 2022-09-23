@@ -43,8 +43,13 @@ int main(int argc, char **argv){
     printf("Item %d: %d\n", q->pos - 1, *ptr);
   }
   printf("After reading: pos: %d count: %d size: %d\n", q->pos, q->count, q->size);
-  queue_seek(q, 0); // Jump back to the start of the queue.
-  printf("After seeking: pos: %d count: %d size: %d\n", q->pos, q->count, q->size);
+  queue_remove(q, 1);
+  printf("After removing: pos: %d count: %d size: %d\n", q->pos, q->count, q->size);
+  queue_seek(q, 0); // Jump to the start
+  while (!queue_exhausted(q)){
+    ptr = queue_get(q);
+    printf("Item %d: %d\n", q->pos - 1, *ptr);
+  }
 
   queue_free(q);
   return 0;
@@ -67,5 +72,14 @@ Item 7: 12
 Item 8: 13
 Item 9: 14
 After reading: pos: 10 count: 10 size: 10
-After seeking: pos: 0 count: 10 size: 10
+After removing: pos: 9 count: 9 size: 10
+Item 0: 5
+Item 1: 7
+Item 2: 8
+Item 3: 9
+Item 4: 10
+Item 5: 11
+Item 6: 12
+Item 7: 13
+Item 8: 14
 ```
